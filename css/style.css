@@ -8,7 +8,13 @@ body {
   justify-content: space-around;
   align-items: center;
 }
-
+h1 {
+  text-align: center;
+  background-color: #b2e4f0;
+  font-size: 4em;
+  padding: 50px;
+  margin-bottom: 50px
+}
 
 ul {
   color: #fff;
