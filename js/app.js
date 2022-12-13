@@ -33,32 +33,43 @@ function randomIndex() {
   return Math.floor(Math.random() * productArray.length);
 }
 
+let indexArray = [];
+
 function renderImg() {
+
   // TODO: 3 unique images and populate the images
 
-  let imgOneIndex = productArray[randomIndex()];
-  let imgTwoIndex = productArray[randomIndex()];
-  let imgThreeIndex = productArray[randomIndex()];
+  while (indexArray.length < 3) {
+    let randoNum = randomIndex();
+    if (!indexArray.includes(randoNum)) {
+      indexArray.push(randoNum);
+    }
+  }
+  let imgOneIndex = indexArray.pop();
+  let imgTwoIndex = indexArray.pop();
+  let imgThreeIndex = indexArray.pop();
 
-  imgOne.src = imgOneIndex.img;
-  imgTwo.src = imgTwoIndex.img;
-  imgThree.src = imgThreeIndex.img;
-  imgOne.title = imgOneIndex.name;
-  imgTwo.title = imgTwoIndex.name;
-  imgThree.title = imgThreeIndex.name;
-  imgOne.alt = `this is an image of ${imgOneIndex.name}`;
-  imgTwo.alt = `this is an image of ${imgTwoIndex.name}`;
-  imgThree.alt = `this is an image of ${imgThreeIndex.name}`;
+  // while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex) {
+  //   imgThreeIndex = productArray[randomIndex()];
+  //   imgTwoIndex = productArray[randomIndex()];
+  // }
+
+
+  imgOne.src = productArray[imgOneIndex].img;
+  imgTwo.src = productArray[imgTwoIndex].img;
+  imgThree.src = productArray[imgThreeIndex].img;
+  imgOne.title = productArray[imgOneIndex].name;
+  imgTwo.title = productArray[imgTwoIndex].name;
+  imgThree.title = productArray[imgThreeIndex].name;
+  imgOne.alt = `this is an image of ${productArray[imgOneIndex].name}`;
+  imgTwo.alt = `this is an image of ${productArray[imgTwoIndex].name}`;
+  imgThree.alt = `this is an image of ${productArray[imgThreeIndex].name}`;
 
   // ** Validation to make sure numbers are unique **
 
-  if (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex) {
-    renderImg();
-  }
-
-  imgOneIndex.views++;
-  imgTwoIndex.views++;
-  imgThreeIndex.views++;
+  productArray[imgOneIndex].views++;
+  productArray[imgTwoIndex].views++;
+  productArray[imgThreeIndex].views++;
 
 }
 
