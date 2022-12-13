@@ -8,7 +8,13 @@ body {
   justify-content: space-around;
   align-items: center;
 }
-
+h1 {
+  text-align: center;
+  background-color: #b2e4f0;
+  font-size: 4em;
+  padding: 50px;
+  margin-bottom: 50px;
+}
 
 ul {
   color: #fff;
@@ -26,7 +32,6 @@ img {
   border-style: solid;
   border-width: 4px;
   border-image: linear-gradient(#ffc9de,#fdd97c,#fbfdaa,#c1f0b2,#c1f0b2,#b2e4f0,#d6b2f0) 1;
-
 }
 
 footer {
@@ -35,4 +40,13 @@ footer {
   text-align: right;
   margin-right: 20px;
   color: #7e57c2
+}
+button {
+  margin: 10px;
+}
+
+#button-container{
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
