@@ -37,13 +37,10 @@ function renderImg() {
   // TODO: 3 unique images and populate the images
 
   let imgOneIndex = productArray[randomIndex()];
-  console.log(imgOneIndex);
   let imgTwoIndex = productArray[randomIndex()];
   let imgThreeIndex = productArray[randomIndex()];
 
   imgOne.src = imgOneIndex.img;
-  console.log(imgOne.src);
-  console.log(imgOneIndex);
   imgTwo.src = imgTwoIndex.img;
   imgThree.src = imgThreeIndex.img;
   imgOne.title = imgOneIndex.name;
