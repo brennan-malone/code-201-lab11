@@ -21,7 +21,7 @@ let resultsList = document.getElementById('results-container');
 
 function Product(name, imgExtension = 'jpg') {
   this.name = name;
-  this.img = `assets/${name}.${imgExtension}`;
+  this.img = `img/${name}.${imgExtension}`;
   this.votes = 0;
   this.views = 0;
 }
