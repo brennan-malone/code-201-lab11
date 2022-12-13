@@ -1,16 +1,17 @@
 'use strict';
 
-console.log('hey there hey!');
+// console.log('hey there hey!');
 
 // ******* GLOBALS *******
-let goatArray = [];
-let votingRounds = 15;
+let productArray = [];
+let votingRounds = 25;
 
 
 //  ****** DOM WINDOWS *******
 let imgContainer = document.getElementById('img-container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
+let imgThree = document.getElementById('img-three');
 
 let resultsBtn = document.getElementById('show-results-btn');
 let resultsList = document.getElementById('results-container');
@@ -18,44 +19,59 @@ let resultsList = document.getElementById('results-container');
 
 // ***** CONSTRUCTOR FUNCTION ******
 
-function Goat(name, imgExtension = 'jpg'){
+function Product(name, imgExtension = 'jpg') {
   this.name = name;
-  this.img = `img/${name}.${imgExtension}`;
+  this.img = `assets/${name}.${imgExtension}`;
   this.votes = 0;
   this.views = 0;
 }
 
 // ***** HELPER FUNCTIONS / UTILITIES *****
 
-function randomIndex(){
-  return Math.floor(Math.random() * goatArray.length);
+
+function randomIndex() {
+  return Math.floor(Math.random() * productArray.length);
 }
 
-function renderImg(){
-  // TODO: 2 unique images and populate the images
-  let imgOneIndex = randomIndex();
-  let imgTwoIndex = randomIndex();
+function renderImg() {
+  // TODO: 3 unique images and populate the images
+
+  let imgOneIndex = productArray[randomIndex()];
+  console.log(imgOneIndex);
+  let imgTwoIndex = productArray[randomIndex()];
+  let imgThreeIndex = productArray[randomIndex()];
+
+  imgOne.src = imgOneIndex.img;
+  console.log(imgOne.src);
+  console.log(imgOneIndex);
+  imgTwo.src = imgTwoIndex.img;
+  imgThree.src = imgThreeIndex.img;
+  imgOne.title = imgOneIndex.name;
+  imgTwo.title = imgTwoIndex.name;
+  imgThree.title = imgThreeIndex.name;
+  imgOne.alt = `this is an image of ${imgOneIndex.name}`;
+  imgTwo.alt = `this is an image of ${imgTwoIndex.name}`;
+  imgThree.alt = `this is an image of ${imgThreeIndex.name}`;
 
   // ** Validation to make sure numbers are unique **
-  while(imgOneIndex === imgTwoIndex){
-    // TODO: reassign one of the variables
-    imgTwoIndex = randomIndex();
+
+  if (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex) {
+    renderImg();
   }
 
-  imgOne.src = goatArray[imgOneIndex].img;
-  imgTwo.src = goatArray[imgTwoIndex].img;
-  imgOne.title = goatArray[imgOneIndex].name;
-  imgTwo.title = goatArray[imgTwoIndex].name;
-  imgOne.alt = `this is an image of ${goatArray[imgOneIndex].name}`;
-  imgTwo.alt = `this is an image of ${goatArray[imgTwoIndex].name}`;
+  imgOneIndex.views++;
+  imgTwoIndex.views++;
+  imgThreeIndex.views++;
 
-  // TODO: increase the number of views on the images that have been rendered
-  goatArray[imgOneIndex].views++;
-  goatArray[imgTwoIndex].views++;
 }
 
 // **** EVENT HANDLERS *****
-function handleClick(event){
+
+function handleClick(event) {
+
+  // TODO: increase the number of views on the images that have been rendered
+
+
   // TODO: Identify what image was clicked on
 
   let imgClicked = event.target.title;
@@ -63,30 +79,30 @@ function handleClick(event){
   console.log(imgClicked);
 
   // TODO: Increase the number of votes to that specific image
-  for(let i = 0; i < goatArray.length; i++){
-    if(imgClicked === goatArray[i].name){
-      goatArray[i].votes++;
+  for (let i = 0; i < productArray.length; i++) {
+    if (imgClicked === productArray[i].name) {
+      productArray[i].votes++;
     }
   }
   // TODO: decrement voting rounds
   votingRounds--;
 
-  // TODO: Rerender 2 new images
+  // TODO: Rerender 3 new images
   renderImg();
 
   // TODO: once voting rounds have ended - not allow any more clicks
-  if(votingRounds === 0){
+  if (votingRounds === 0) {
     imgContainer.removeEventListener('click', handleClick);
   }
 }
 
 
-function handleShowResults(){
+function handleShowResults() {
   // TODO: Display the results once the there are no more votes
-  if(votingRounds === 0){
-    for(let i = 0; i < goatArray.length; i++){
+  if (votingRounds === 0) {
+    for (let i = 0; i < productArray.length; i++) {
       let liElem = document.createElement('li');
-      liElem.textContent = `${goatArray[i].name} - views: ${goatArray[i].views} & votes: ${goatArray[i].votes}`;
+      liElem.textContent = `${productArray[i].name} - views: ${productArray[i].views} & votes: ${productArray[i].votes}`;
       resultsList.appendChild(liElem);
     }
     resultsBtn.removeEventListener('click', handleShowResults);
@@ -97,21 +113,32 @@ function handleShowResults(){
 
 
 // **** EXECUTABLE CODE *****
-let bunnyGoat = new Goat('bunny-goat', 'png');
-let coolGoat = new Goat('cool-goat');
-let cruisinGoat = new Goat('cruisin-goat');
-let floatGoat = new Goat('float-your-goat');
-let goatHand = new Goat('goat-out-of-hand');
-let kissingGoat = new Goat('kissing-goat');
-let sassyGoat = new Goat('sassy-goat');
-let smilingGoat = new Goat('smiling-goat');
-let sweaterGoat = new Goat('sweater-goat');
+let bag = new Product('bag');
+let banana = new Product('banana');
+let bathroom = new Product('bathroom');
+let boots = new Product('boots');
+let breakfast = new Product('breakfast');
+let bubblegum = new Product('bubblegum');
+let chair = new Product('chair');
+let cthulhu = new Product('cthulhu');
+let dogDuck = new Product('dog-duck');
+let dragon = new Product('dragon');
+let pen = new Product('pen');
+let petSweep = new Product('pet-sweep');
+let scissors = new Product('scissors');
+let shark = new Product('shark');
+let sweep = new Product('sweep', 'png');
+let tauntaun = new Product('tauntaun');
+let unicorn = new Product('unicorn');
+let waterCan = new Product('water-can');
+let wineGlass = new Product('wine-glass');
 
-goatArray.push(bunnyGoat, coolGoat, cruisinGoat, floatGoat, goatHand, kissingGoat, sassyGoat, smilingGoat, sweaterGoat);
+productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
+
 
 renderImg();
 
 imgContainer.addEventListener('click', handleClick);
 resultsBtn.addEventListener('click', handleShowResults);
 
-// console.log(goatArray);
+// console.log(productArray);
