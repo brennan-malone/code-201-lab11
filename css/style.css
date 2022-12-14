@@ -24,6 +24,7 @@ ul {
 
 li {
   line-height: 30px;
+  color: none;
 }
 
 img {
@@ -43,7 +44,7 @@ footer {
 }
 
 button {
-  background-color: #d6b2f0;
+  background-color: #fdd97c;
   border: none;
   color: #222;
   padding: 15px 30px;
@@ -52,8 +53,15 @@ button {
   margin-top: 20px;
 }
 
-#button-container{
+#button-container {
   display: flex;
   width: 100%;
   justify-content: center;
+}
+
+#results-container {
+  position: relative;
+  height: 80vh;
+  width: 80vw;
+  margin: 50px auto;
 }
