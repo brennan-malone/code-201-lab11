@@ -38,6 +38,8 @@ let indexArray = [];
 
 function renderImg() {
 
+
+
   // TODO: 3 unique images and populate the images
 
   while (indexArray.length < 6) {
@@ -141,6 +143,11 @@ function handleClick(event) {
   // TODO: once voting rounds have ended - not allow any more clicks
   if (votingRounds === 0) {
     imgContainer.removeEventListener('click', handleClick);
+
+    let stringifiedProducts = JSON.stringify(productArray);
+
+    localStorage.setItem('myProducts', stringifiedProducts);
+
   }
 }
 
