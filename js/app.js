@@ -165,8 +165,20 @@ let retrievedProducts = localStorage.getItem('myProducts');
 
 let parsedProducts = JSON.parse(retrievedProducts);
 
-
 if (retrievedProducts) {
+  for(let i = 0; i < parsedProducts.length; i++) {
+    if(parsedProducts[i].name === 'sweep'){
+      let reconstructedSweep = new Product(parsedProducts[i].name, 'png');
+      reconstructedSweep.views = parsedProducts[i].views;
+      reconstructedSweep.votes = parsedProducts[i].votes;
+      productArray.push(reconstructedSweep);
+    }else {
+      let reconstructedProduct = new Product(parsedProducts[i].views);
+      reconstructedProduct.views = parsedProducts[i].views;
+      reconstructedProduct.votes = parsedProducts[i].votes;
+      productArray.push(reconstructedProduct);
+    }
+  }
   productArray = parsedProducts;
 } else {
   // **** EXECUTABLE CODE *****
@@ -192,9 +204,6 @@ if (retrievedProducts) {
 
   productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 }
-
-
-
 
 
 renderImg();
