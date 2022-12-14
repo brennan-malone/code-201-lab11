@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 // console.log('hey there hey!');
 
 // ******* GLOBALS *******
@@ -14,8 +16,7 @@ let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
 
 let resultsBtn = document.getElementById('show-results-btn');
-let resultsList = document.getElementById('results-container');
-
+let canvasElem = document.getElementById('chart');
 
 // ***** CONSTRUCTOR FUNCTION ******
 
@@ -39,15 +40,15 @@ function renderImg() {
 
   // TODO: 3 unique images and populate the images
 
-  while (indexArray.length < 3) {
+  while (indexArray.length < 6) {
     let randoNum = randomIndex();
     if (!indexArray.includes(randoNum)) {
       indexArray.push(randoNum);
     }
   }
-  let imgOneIndex = indexArray.pop();
-  let imgTwoIndex = indexArray.pop();
-  let imgThreeIndex = indexArray.pop();
+  let imgOneIndex = indexArray.shift();
+  let imgTwoIndex = indexArray.shift();
+  let imgThreeIndex = indexArray.shift();
 
   // while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex) {
   //   imgThreeIndex = productArray[randomIndex()];
@@ -71,6 +72,45 @@ function renderImg() {
   productArray[imgTwoIndex].views++;
   productArray[imgThreeIndex].views++;
 
+}
+
+function renderChart(){
+  let productNames = [];
+  let productVotes = [];
+  let productViews = [];
+
+  for (let i = 0; i < productArray.length; i++){
+    productNames.push(productArray[i].name);
+    productVotes.push(productArray[i].votes);
+    productViews.push(productArray[i].views);
+  }
+
+  let chartObj = {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Votes',
+        data: productVotes,
+        borderWidth: 1,
+        backgroundColor: '#b2e4f0'
+      },
+      {
+        label: '# of Views',
+        data: productViews,
+        borderWidth: 1,
+        backgroundColor: '#d6b2f0'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+  new Chart(canvasElem, chartObj);
 }
 
 // **** EVENT HANDLERS *****
@@ -108,14 +148,14 @@ function handleClick(event) {
 function handleShowResults() {
   // TODO: Display the results once the there are no more votes
   if (votingRounds === 0) {
-    for (let i = 0; i < productArray.length; i++) {
-      let liElem = document.createElement('li');
-      liElem.textContent = `${productArray[i].name} - views: ${productArray[i].views} & votes: ${productArray[i].votes}`;
-      resultsList.appendChild(liElem);
-    }
+    // for (let i = 0; i < productArray.length; i++) {
+    //   let liElem = document.createElement('li');
+    //   liElem.textContent = `${productArray[i].name} - views: ${productArray[i].views} & votes: ${productArray[i].votes}`;
+    //   resultsList.appendChild(liElem);
+    // }
     resultsBtn.removeEventListener('click', handleShowResults);
+    renderChart();
   }
-
 }
 
 
